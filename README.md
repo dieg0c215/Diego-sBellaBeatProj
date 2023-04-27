@@ -14,7 +14,7 @@
 ## Introduction
 For my introduction I will be going through a brief description of the company this case study is focused on.  Bella beat is a tech manufacture with an array of health products curated toward women. Bella beat is described as a small but successful company with the potential to become a major competitor in the global smart device market. The company offers a multitude of products that are designed to collect and keep track of user data relating to daily activity such as:  sleep, exercise, step counts, and calories burned. In this study I will be designated as a junior analyst tasked with analyzing the data collected by Bella beat’s devices and make conclusions on how exactly consumers are using their products.  My overall goal will be to use these conclusions to better design the company’s products and help guide the company to new opportunities. 
 
-## Ask
+## 1. Ask
 **Business Task**
 
 Analyze the dataset provided by Bella beat to identify current user trends to gain insight on its fitness wellness products. Our goal is to develop recommendations for how these trends can inform Bella beat marketing strategy.

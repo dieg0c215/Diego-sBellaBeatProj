@@ -77,6 +77,7 @@ Sleep Day_Merged
 **RStudio**
 
 For R studio I needed to process the data I order to develop graphs more easily. I first imported the files and assigned them a variable name:
+
 dailyActivity <- read.csv("dailyActivity_merged.csv")
 sleepDay <- read.csv("sleepDay_merged.csv")
 hourlySteps <- read.csv("hourlySteps_merged.csv")

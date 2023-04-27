@@ -30,7 +30,7 @@ Main Issues:
 3. How could these trends help influence Bella beat marketing strategy
 
 
-## 2.Prepare
+## 2. Prepare
 **DataSet Used**
 
 FitBit Fitness Tracker Data (CC0: Public Domain, dataset made available through Mobius): This Kaggle data set
@@ -47,7 +47,7 @@ I will be primary focused on the datasets labeled as: Daily Activity_merged, Dai
 Data is dated from March 201 to May 2016. There4 is no current data
 To check for the distinct user ids for each dataset I used both R and SQL. For R I used the command n_distinct and found: 33 users for daily activity, 33 for daily calories, 33 for daily intensities, 21 for sleep, and 8 for weight. I did the same for SQL using the Count(id) command and found the same number of user ids for each.  Verifying the number of users, I can say that the data is a limited but the central limit theorem allows for any conclusions I find to still be valid.  
 
-## 3.Process
+## 3. Process
 
 To start off my data cleaning process, I first used Microsoft Excel to look for duplicated and format the data to ensure the data was imported correctly to both R studio and Big Query (SQL), the two main tools I will be using for analysis:
 
@@ -78,7 +78,7 @@ Sleep Day_Merged
 - Format Data: Separated Hour and Date in columns,
 - Format Activity Date and Hour by Format Tool
 
-## 4.Analyze
+## 4. Analyze
 **User Activity Levels**
 
 I will be starting my first half of my analysis using Big Query SQL. My first bit of code will be looking at the number of days that each unique user logs for their daily activity. This SQL query will categorize the use of each user and place them in their respective categories: 
@@ -99,6 +99,8 @@ ORDER BY TotalUserActivity;
 ```
 The query was able to show me that 29 users were active, 3 users were moderate, and 1 user was passive with logging their activity.
  
+ ![image](https://user-images.githubusercontent.com/98061069/235008761-599f6715-4970-4936-bb06-6e8c61e0be12.png)
+
 
 Relationship between total steps and total distance 
 After verifying the activity for users, it was time to start looking into the participants fitness habits. To begin I wanted to look at the relationship between the total steps and total distance that each user records.  The following query was able to show me how steps and distance were related: 
@@ -112,6 +114,7 @@ FROM
 GROUP BY Id
 ORDER BY TotalDistance DESC;
 ```
+![image](https://user-images.githubusercontent.com/98061069/235008790-2728c32e-d60b-4d3d-b926-e3ede7429fe4.png)
 
 This query was able to show me that the correlation between the total steps and total distance of each user was very positive. Suggesting that physically those who traveled longer distances did have higher step counts.  
 
@@ -127,6 +130,8 @@ FROM
 GROUP BY Id
 ORDER BY TotalCalories DESC;
 ```
+![image](https://user-images.githubusercontent.com/98061069/235008827-83fbf96c-d94d-4191-bad7-d4562f01a555.png)
+
 
 The query was able to show me that there is a slight positive correlation between the total distance a user logs versus the total calories they burn with the watch on. Looking at the numbers it is not as clear cut as the relationship between steps and distance. For example, the highest calories count belonged to a user that had about half the amount of distance logged compared to the second highest calorie burner. These values started point me toward the idea that higher stats for fitness goals don’t always lead to better outcomes. 
  
@@ -160,8 +165,10 @@ ActivityDate
 )
 ```
 The query was able to show me that only 7 users were able to reach the goal of having on average 10,000 steps per day. 9 users had at least 7,500 steps, 9 users had at least 5,500 steps, and 8 users had under 5,000 steps. This query and the one above (showing me total calorie count) are able to give me an idea that steps are not the only factor in having decent calorie counts. 
- 
 
+![image](https://user-images.githubusercontent.com/98061069/235008856-edb9cf5e-6af7-4828-8ff2-740762e474d4.png)
+
+ 
 **Activity vs Calories**
 
 For my next analysis I decided to take my data to Rstudio which was a much better suited tool for me for my next inquiry. After taking a look at the average step counts for users I wanted to find the relationship between steps and calories as well as the sedentary number of minutes a user had on a certain day. I was able to do this with the following query: 
@@ -186,6 +193,7 @@ activeMinutesvsSteps <- ggplot(data = mergedData) +
 This query was able to show me again that higher totals on fitness goals don’t always lead to the highest returns. Generally, the higher a person’s step count is the more calories they are likely to burn. However, from the graph below I can see that the highest calorie burner is not the user with the highest step count.  In fact, the person with the highest step total only had an average calorie count at best. Even looking at the majority of users they are still able to burn between 1500 to 2500 calories despite being under the 10,000-step goal that doctors recommend.  All of these values point to the idea that it when it comes to fitness goals the quality of the work you do outweighs the quantity of work. 
  
 
+![image](https://user-images.githubusercontent.com/98061069/235008899-5dace228-0aac-4edf-b203-54e6697c3983.png)
 
 
 

@@ -49,34 +49,63 @@ To check for the distinct user ids for each dataset I used both R and SQL. For R
 
 ## 3. Process
 
-To start off my data cleaning process, I first used Microsoft Excel to look for duplicated and format the data to ensure the data was imported correctly to both R studio and Big Query (SQL), the two main tools I will be using for analysis:
+**Excel**
 
+To start off my data cleaning process, I first used Microsoft Excel to look for duplicated and format the data to ensure the data was imported correctly to both R studio and Big Query (SQL), the two main tools I will be using for analysis:
 Daily Activity_merged
-- Remove Duplicates: No duplicate values found
-- Format Data: Format Column B (Activity Date) by Date;
-- Format Numerical Data to two decimals
+1. Remove Duplicates: No duplicate values found
+2.  Format Data: Format Column B (Activity Date) by Date;
+3.  Format Numerical Data to two decimals
 
 Daily Calories _merged
-- Remove Duplicates: No duplicate values found
-- Format Data: Format Column D (Activity Day) by Date;
-- Format Numerical Data to two decimals
-
+1. Remove Duplicates: No duplicate values found
+2. Format Data: Format Column D (Activity Day) by Date;
+3. Format Numerical Data to two decimals
 
 Daily Intensities_merged
-- Remove Duplicates: No duplicate values found
-- Format Data in date format
-
+1. Remove Duplicates: No duplicate values found
+2. Format Data in date format
 
 Daily Steps_Merged
-- Remove Duplicates: No duplicate values found
-- Format Data in date format
-
-
+1. Remove Duplicates: No duplicate values found
+1. Format Data in date format
 Sleep Day_Merged
+1. Remove Duplicates: 3 duplicate values removed, 410 unique values remain
+2.  Format Data: Separated Hour and Date in columns,
+3.  Format Activity Date and Hour by Format Tool
 
-- Remove Duplicates: 3 duplicate values removed, 410 unique values remain
-- Format Data: Separated Hour and Date in columns,
-- Format Activity Date and Hour by Format Tool
+**RStudio**
+
+For R studio I needed to process the data I order to develop graphs more easily. I first imported the files and assigned them a variable name:
+dailyActivity <- read.csv("dailyActivity_merged.csv")
+sleepDay <- read.csv("sleepDay_merged.csv")
+hourlySteps <- read.csv("hourlySteps_merged.csv")
+dailyIntensities <- read.csv(dailyIntensities.csc")
+
+I then looked at to see if there was any duplicate or null values:
+
+sum(is.na(dailyActivity))
+sum(is.na(sleepDay))
+sum(is.na(dailyIntensities))
+sum(duplicated(dailyActivity))
+sum(duplicated(sleepDay))
+sum(duplicated(dailyIntensites))
+
+After verifying duplicate values I went ahead and deleted them: 
+sleep_day <- sleep_day[!duplicated(sleep_day), ]
+ 
+To able to make graphs depending on certain days of the week I also added weekdays: 
+
+daily_activity <- daily_activity %>% mutate( Weekday = weekdays(as.Date(ActivityDate, "%m/%d/%Y")))
+
+Finally I merged daily activty and sleep day data and ordered the data Sunday to Monday to plot later:
+
+merged1 <- merge(daily_activity,sleep_day,by = c("Id"), all=TRUE)
+merged_data <- merge(merged1, weight, by = c("Id"), all=TRUE)
+
+merged_data$Weekday <- factor(merged_data$Weekday, levels= c("Monday", 
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+
 
 ## 4. Analyze
 **User Activity Levels**
@@ -102,7 +131,8 @@ The query was able to show me that 29 users were active, 3 users were moderate, 
  ![image](https://user-images.githubusercontent.com/98061069/235008761-599f6715-4970-4936-bb06-6e8c61e0be12.png)
 
 
-Relationship between total steps and total distance 
+**Relationship between Total steps and Total distance **
+
 After verifying the activity for users, it was time to start looking into the participants fitness habits. To begin I wanted to look at the relationship between the total steps and total distance that each user records.  The following query was able to show me how steps and distance were related: 
 ```
 SELECT
@@ -114,11 +144,13 @@ FROM
 GROUP BY Id
 ORDER BY TotalDistance DESC;
 ```
-![image](https://user-images.githubusercontent.com/98061069/235008790-2728c32e-d60b-4d3d-b926-e3ede7429fe4.png)
 
 This query was able to show me that the correlation between the total steps and total distance of each user was very positive. Suggesting that physically those who traveled longer distances did have higher step counts.  
 
+![image](https://user-images.githubusercontent.com/98061069/235008790-2728c32e-d60b-4d3d-b926-e3ede7429fe4.png)
+
 **Total Distance vs Total Calories**
+
 When looking at the relationship of Total Steps and Total Distance it makes sense physically that those with higher step counts have higher total distances. However, when it comes to fitness goals this may not be as simple when looking deeper into a user’s habits. I wanted to see if the total distance had any sort of relationship with the total calories that each user burned. I used the following query to look at this relationship:
 ```
 SELECT
@@ -193,8 +225,7 @@ activeMinutesvsSteps <- ggplot(data = mergedData) +
 This query was able to show me again that higher totals on fitness goals don’t always lead to the highest returns. Generally, the higher a person’s step count is the more calories they are likely to burn. However, from the graph below I can see that the highest calorie burner is not the user with the highest step count.  In fact, the person with the highest step total only had an average calorie count at best. Even looking at the majority of users they are still able to burn between 1500 to 2500 calories despite being under the 10,000-step goal that doctors recommend.  All of these values point to the idea that it when it comes to fitness goals the quality of the work you do outweighs the quantity of work. 
  
 
-![image](https://user-images.githubusercontent.com/98061069/235008899-5dace228-0aac-4edf-b203-54e6697c3983.png)
-
+![image](https://user-images.githubusercontent.com/98061069/235009335-f0931535-2115-4535-88d1-d238ccf43fa1.png)
 
 
 
@@ -248,4 +279,38 @@ ActiveMinutesvsCalories <- ggplot(data = mergedData) +
 
 This query was able to show me that when it comes to calorie count it appears the majority of calories that are burned by users are during their sedentary hours, this may be accounting for the calories that the human body would burn to function normally.  According to the Medical New Today, the average man requires at least 2,700 calories per day to maintain bodyweight while the average woman needs 2,200 calories. From these daily calories around 60-75 percent go toward supplying energy to vital organs, muscles, and other bodily functions. Looking at the graph below I can see that the majority of calories burned fall under the sedentary range which does follow the logic of a good portion of calories being used for bodily functions. However, when I look at the end of the graph, I can also identify the upwards trend of calories burned when active and the downward trend of calories burned when not active.  This would suggest that the more a user burns calories while active cuts into the time they spend sedentary. 
 
-![image](https://user-images.githubusercontent.com/98061069/234754882-37af77d5-d3f0-4e0d-910e-6b3061bf75b5.png)
+![image](https://user-images.githubusercontent.com/98061069/235009590-6609c6ad-b997-4bfb-8c53-370e4b2695ce.png)
+
+
+**Sleep Hours vs Calories**
+
+After looking at calories burned during activity I wanted to see if there was any relationship between a user’s sleep quality and their calorie counts. I first wanted to look at the average number of hours of sleep for each user. According to the American Heart Association (https://www.heart.org/en/healthy-living/go-red-get-fit/sleep-women-and-heart-disease) doctors recommend a minimum of 6 hours of sleep.  I wanted to use SQL to see if users are able to average this threshold using the following query: 
+```
+SELECT
+    Id,
+    COUNT(CASE WHEN TotalMinutesAsleep > 360 THEN 1 ELSE NULL END) AS daysOver360Min,
+    (AVG(TotalMinutesAsleep))/60 AS average_sleep_hours
+FROM
+    `BellaBeatData.sleepDay`
+GROUP BY Id
+HAVING daysOver360Min > 0;
+
+This query was able to show me that of the users that did log sleep hours 16 of them did record at least 6 hours of sleep while 5 of them did not.
+```
+![image](https://user-images.githubusercontent.com/98061069/235009699-0466dac6-f781-45f1-bc45-a961faaa8f96.png)
+
+After verifying that majority of the user were able to get adequate sleep I wanted to see if there was any relationship between sleep and calorie counts. For this I went ahead and used R with the following query: 
+
+```
+ggplot(data=mergedData, aes(x=TotalMinutesAsleep, y = Calories, color=TotalMinutesAsleep))+ 
+     geom_point()+ 
+     labs(title="Total Minutes Asleep vs Calories")+
+     xlab("Total Minutes Alseep")+
+     stat_smooth(method=lm)+
+     scale_color_gradient(low="orange", high="steelblue")
+```
+The query was able to show me that there is no relationship between the hours a person sleeps and their calorie counts.
+
+![image](https://user-images.githubusercontent.com/98061069/235009810-9892a3d7-9f7f-4a43-96d8-a0a1e1df9992.png)
+
+

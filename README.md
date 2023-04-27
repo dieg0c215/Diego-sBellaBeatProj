@@ -30,7 +30,7 @@ Main Issues:
 3. How could these trends help influence Bella beat marketing strategy
 
 
-## Prepare:
+## 2.Prepare
 **DataSet Used**
 
 FitBit Fitness Tracker Data (CC0: Public Domain, dataset made available through Mobius): This Kaggle data set
@@ -47,7 +47,7 @@ I will be primary focused on the datasets labeled as: Daily Activity_merged, Dai
 Data is dated from March 201 to May 2016. There4 is no current data
 To check for the distinct user ids for each dataset I used both R and SQL. For R I used the command n_distinct and found: 33 users for daily activity, 33 for daily calories, 33 for daily intensities, 21 for sleep, and 8 for weight. I did the same for SQL using the Count(id) command and found the same number of user ids for each.  Verifying the number of users, I can say that the data is a limited but the central limit theorem allows for any conclusions I find to still be valid.  
 
-## Process
+## 3.Process
 
 To start off my data cleaning process, I first used Microsoft Excel to look for duplicated and format the data to ensure the data was imported correctly to both R studio and Big Query (SQL), the two main tools I will be using for analysis:
 
@@ -78,7 +78,7 @@ Sleep Day_Merged
 - Format Data: Separated Hour and Date in columns,
 - Format Activity Date and Hour by Format Tool
 
-## Analyze
+## 4.Analyze
 **User Activity Levels**
 
 I will be starting my first half of my analysis using Big Query SQL. My first bit of code will be looking at the number of days that each unique user logs for their daily activity. This SQL query will categorize the use of each user and place them in their respective categories: 

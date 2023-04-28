@@ -5,8 +5,7 @@
 ### ❓ [Ask](#1-ask)
 ### 💻 [Prepare](#2-prepare)
 ### 🛠 [Process](#3-process)
-### 📊 [Analyze](#4-analyze)
-### 📋 [Share](#5-share)
+### 📊 [Analyze and Share](#4-analyze amd share)
 ### 🧗‍♀️ [Act](#6-act)
 
 
@@ -108,7 +107,7 @@ merged_data$Weekday <- factor(merged_data$Weekday, levels= c("Monday",
     "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
 
 
-## 4. Analyze
+## 4. Analyze and Share
 **User Activity Levels**
 
 I will be starting my first half of my analysis using Big Query SQL. My first bit of code will be looking at the number of days that each unique user logs for their daily activity. This SQL query will categorize the use of each user and place them in their respective categories: 

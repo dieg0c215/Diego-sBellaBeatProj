@@ -5,8 +5,8 @@
 ### ❓ [Ask](#1-ask)
 ### 💻 [Prepare](#2-prepare)
 ### 🛠 [Process](#3-process)
-### 📊 [Analyze and Share](#4-analyze amd share)
-### 🧗‍♀️ [Act](#6-act)
+### 📊 [Analyze](#4-analyze)
+### 🧗‍♀️ [Act](#5-act)
 
 
 
@@ -107,7 +107,7 @@ merged_data$Weekday <- factor(merged_data$Weekday, levels= c("Monday",
     "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
 
 
-## 4. Analyze and Share
+## 4. Analyze 
 **User Activity Levels**
 
 I will be starting my first half of my analysis using Big Query SQL. My first bit of code will be looking at the number of days that each unique user logs for their daily activity. This SQL query will categorize the use of each user and place them in their respective categories: 
@@ -313,7 +313,7 @@ The query was able to show me that there is no relationship between the hours a 
 
 ![image](https://user-images.githubusercontent.com/98061069/235009810-9892a3d7-9f7f-4a43-96d8-a0a1e1df9992.png)
 
-## 5. Share
+## 5. Act
 Recommendations
 Recommending workout plans
 There is a relationship between the activity that user does and the calories that they burn. The watch could lean toward giving user suggestion on exercises that may be more efficient for their fitness goals. 

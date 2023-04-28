@@ -314,4 +314,17 @@ The query was able to show me that there is no relationship between the hours a 
 
 ![image](https://user-images.githubusercontent.com/98061069/235009810-9892a3d7-9f7f-4a43-96d8-a0a1e1df9992.png)
 
+## 5. Share
+Recommendations
+Recommending workout plans
+There is a relationship between the activity that user does and the calories that they burn. The watch could lean toward giving user suggestion on exercises that may be more efficient for their fitness goals. 
+Mixed Calories Counters
+The watches have no function when it comes to distrusting calories burned during periods of activity. A feature should be added to be able to differentiate between the calories burned at a sedentary level and active level. 
+Push Notifications on Mobile Device
+
+Data some users are not logging as much activity as others, they could benefit from feature that allows the watches to remind users to log any activity through their phones. This way they will be more conscience of keeping track of progress.  
+
+
+Progression System
+The watch should have level system where users are notified with how far their progress is going in reaching their fitness goals.  For example, users can set a goal to have at least 5,000 steps per day and after a certain period of time achieving this, they can be pushed to go for 6,0000 to slowly progress. 
 
